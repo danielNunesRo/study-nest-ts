@@ -7,13 +7,15 @@ import { PostUsuarioRepository } from "./postUsuario/repositories/postUsuario.re
 import { GetUsuarioRepository } from "./getUsuarios/repositories/getUsuario.repository";
 import { GetUsuarioByEmailService } from "./getUsuarioByEmail/service/getUsuarioByEmail.service";
 import { GetUsuarioByEmailRepository } from "./getUsuarioByEmail/repositories/getUsuarioByEmail.repository";
+import { UpdateUsuarioService } from "./updateUsuarios/service/updateUsuario.service";
+import { UpdateUsuarioRepository } from "./updateUsuarios/repositories/updateUsuario.repository";
 
 
 @Module({
     imports: [],
     controllers: [UsuarioController],
-    providers: [PostUsuarioService, GetUsuarioService, DatabaseService,PostUsuarioRepository, GetUsuarioRepository, GetUsuarioByEmailService, GetUsuarioByEmailRepository],
-    exports: [PostUsuarioService, GetUsuarioService, GetUsuarioByEmailService]
+    providers: [PostUsuarioService, GetUsuarioService, DatabaseService,PostUsuarioRepository, GetUsuarioRepository, GetUsuarioByEmailService, GetUsuarioByEmailRepository,UpdateUsuarioService, UpdateUsuarioRepository],
+    exports: [PostUsuarioService, GetUsuarioService, GetUsuarioByEmailService,UpdateUsuarioService]
 })
 
 export class UsuarioModule {}
