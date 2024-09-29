@@ -7,6 +7,7 @@ import { GetUsuarioByEmailService } from "../getUsuarioByEmail/service/getUsuari
 import { GetUsuarioByEmailInputDto } from "../getUsuarioByEmail/dtos/GetUsuarioByEmailInput.dto";
 import { UpdateUsuarioInputDto } from "../updateUsuarios/dto/updateUsuario.dto";
 import { UpdateUsuarioService } from "../updateUsuarios/service/updateUsuario.service";
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 
 
 @Injectable()
@@ -19,17 +20,27 @@ export class UsuarioController {
         private readonly updateUsuario: UpdateUsuarioService) {}
 
     @Get()
+    @ApiTags('users')
+    @ApiOperation({summary: 'listar todos os usuarios'})
+    @ApiResponse({ status: 200, description: 'Lista de usuários retornada com sucesso.' })
     async GetUsuarios(): Promise<GetUsuarioOutputDto[]> {
         return await this.getUsuarios.exec()
     }
 
     @Get('/email')
+    @ApiTags('users')
+    @ApiOperation({summary: 'buscar usuario por email'})
+    @ApiResponse({status: 200, description: 'Usuario retornado com sucesso'})
     async GetUsuarioByEmail(@Query() data: GetUsuarioByEmailInputDto): Promise<GetUsuarioOutputDto> {
         return this.getUsuariosByEmail.exec(data);
     }
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
+    @ApiTags('users')
+    @ApiOperation({summary: 'Insere um novo usuario no banco de dados'})
+    @ApiResponse({status: 201, description: 'Usuario inserido com sucesso'})
+    @ApiQuery({description: 'Dados necessários para salvar um novo usuario', type: PostUsuarioInputDto})
     async PostUsuarios(@Query() dto: PostUsuarioInputDto) {
         return await this.postUsuario.exec(dto);
     }
