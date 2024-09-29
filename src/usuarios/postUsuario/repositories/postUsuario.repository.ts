@@ -24,4 +24,21 @@ export class PostUsuarioRepository {
         return await this.db.query(sql, binds);
     }
 
+    async existingUser(email: string) {
+
+        const sql = `
+            SELECT NOME, SOBRENOME, EMAIL, TELEFONE FROM clientes c
+            WHERE email = :email
+        `
+
+        const binds = {
+            email: email
+        }
+
+        const response = await this.db.query(sql, binds);
+
+        return response[0];
+
+    }
+
 }
